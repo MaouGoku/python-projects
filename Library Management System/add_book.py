@@ -13,8 +13,8 @@ def add_book():
     for book in books.values():
         if book["name"] not in book_inventory:
             book_inventory[book["name"]] = 1
-    else:
-        book_inventory[book["name"]] += 1 
+        else:
+            book_inventory[book["name"]] += 1 
     print(f"Book '{book_name}' by {author_name} added successfully with ID {book_id}.")
     
     # author_name = input("Enter the name of the author: ")
