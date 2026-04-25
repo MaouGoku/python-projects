@@ -28,5 +28,15 @@ def issue_book():
         match[0].issue_date = issue_date
         match[0].return_date = issue_date + dt.timedelta(days=7)
         print(f"{student_name} have issued '{match[0].name}' by {match[0].author} (ID: {match[0].id}) on {match[0].issue_date.strftime("%d-%m-%Y")}. Due date: {match[0].return_date.strftime("%d-%m-%Y")}.")
+        print("""
+Fine Policy:
+A late return will incur a progressive fine calculated as follows:
+
+Week 1: ₹10 per day per book
+Week 2: ₹10*2 per day per book
+Week 3: ₹10*2*3 per day per book
+Subsequent weeks: The daily fine increases multiplicatively (₹10 × 1 × 2 × 3 × … per week).
+The total fine is computed cumulatively based on the number of overdue days.
+""")
         return
     print(f"Sorry, '{book_name}' by {author_name} is not available.")
