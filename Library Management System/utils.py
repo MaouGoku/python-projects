@@ -29,8 +29,12 @@ class Book:
                     else:
                         fine += 10 * math.factorial(i) * 7
                 self.fine = fine
-
-
+    def count_book(self):
+        count = 0
+        for i in books.values():
+            if self.name == i.name and self.author == i.author and i.status == "available":
+                count += 1
+        return count
 
 
         
