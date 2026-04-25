@@ -1,4 +1,4 @@
-from utils import books, book_inventory
+from utils import books, Book
 import random
 
 def add_book():
@@ -8,18 +8,7 @@ def add_book():
     while book_id in books:
         book_id = random.randint(1000, 9999)
         
-    books[book_id] = {
-        "name": book_name,
-        "author": author_name,
-        "available": True,
-        "issue": None      
-    }
+    books[book_id] = Book(book_id, book_name, author_name)
     
-    key = (book_name, author_name)
-    if key not in book_inventory:
-        book_inventory[key] = 1
-    else:
-        book_inventory[key] += 1
-        
     print(f"Book '{book_name}' by {author_name} added successfully with ID {book_id}.")
     
