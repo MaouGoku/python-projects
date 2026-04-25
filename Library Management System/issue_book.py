@@ -8,17 +8,25 @@ def issue_book():
     roll_number = input("Enter your roll number: ").strip().upper()
     issue_date =  dt.datetime.now().date()
     
+    # Checks if the student has already issued the same book
+    Verify_issued = [i for i in books.values() if i.name == book_name and i.author == author_name and i.status == "issued" and i.issued_roll == roll_number and i.issued_by == student_name]
+    if Verify_issued:
+        print(f"{student_name} has already issued '{book_name}' by {author_name} (ID: {Verify_issued[0].id}) on {Verify_issued[0].issue_date.strftime('%d-%m-%Y')}. Due date: {Verify_issued[0].return_date.strftime('%d-%m-%Y')}.")
+        return    
+
+    # Checks if the book is available and prints all the available books with the same name and author
     match = [i for i in books.values() if i.name == book_name and i.author == author_name and i.status == "available"]
     
+    #Displays all the available books with the same name and author
     for i in match:
         print(i)
-
+    #Issues the book to the student if available
     if match:
         match[0].status = "issued"
         match[0].issued_by = student_name
         match[0].issued_roll = roll_number
         match[0].issue_date = issue_date
         match[0].return_date = issue_date + dt.timedelta(days=7)
-        print(f"{student_name} have issued '{match[0].name}' (ID: {match[0].id}) on {match[0].issue_date.strftime("%d-%m-%Y")}. Due date: {match[0].return_date.strftime("%d-%m-%Y")}.")
+        print(f"{student_name} have issued '{match[0].name}' by {match[0].author} (ID: {match[0].id}) on {match[0].issue_date.strftime("%d-%m-%Y")}. Due date: {match[0].return_date.strftime("%d-%m-%Y")}.")
         return
-    print(f"Sorry, '{book_name}' is not available.")
+    print(f"Sorry, '{book_name}' by {author_name} is not available.")
