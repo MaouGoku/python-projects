@@ -1,10 +1,16 @@
-from utils import books, book_inventory
+from utils import books, Book
 
-def show_book():
-    if not book_inventory:
+def show_books():
+    if not books:
         print("\nNo books available in the library.\n")
         return
-    print("\n====== Books available in the library ======\n")
-
-    for (name, author), count in book_inventory.items():
-        print(f"- {name} by {author} | Available: {count}")
+        
+    print("\n====== BOOKS AVAILABLE IN THE LIBRARY ======\n")
+    print("| TITLE | AUTHOR | COUNT | ")
+    l=[]
+    for i in books.values():
+        if i.status == "available":
+            if (i.name,i.author) not in l:
+                print(f"| {i.name} | {i.author} | {i.count_book()} |")
+                l.append((i.name,i.author))
+    print("\n============================================\n")
